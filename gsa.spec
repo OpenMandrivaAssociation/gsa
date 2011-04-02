@@ -15,7 +15,7 @@ BuildRequires:	libxslt-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	glib2-devel
 BuildRequires:	gnutls-devel
-Requires:	openvas-manager
+BuildRequires:	xsltproc
 
 %description
 The Greenbone Security Assistant is a web application that
@@ -26,6 +26,8 @@ vulnerability management.
 %prep
 %setup -q -n greenbone-security-assistant-%version
 %patch0 -p0 -b .build
+
+sed -i -e 's#-Werror##' `grep -rl Werror *|grep CMakeLists.txt`
 
 %build
 %cmake -DSYSCONFDIR=%{_sysconfdir}
