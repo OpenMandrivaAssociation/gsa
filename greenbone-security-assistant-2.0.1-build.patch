@@ -1,0 +1,41 @@
+--- src/CMakeLists.txt.build	2011-04-02 14:46:05.000000000 +0200
++++ src/CMakeLists.txt	2011-04-02 14:48:01.000000000 +0200
+@@ -130,19 +130,23 @@
+   add_custom_target (oap-xsl-syntax ALL
+                                     COMMENT "Checking syntax of oap.xsl"
+                                     COMMAND xsltproc html/oap.xsl
+-                                    DEPENDS html/oap.xsl)
++                                    DEPENDS html/oap.xsl
++				    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+   add_custom_target (omp-xsl-syntax ALL
+                                     COMMENT "Checking syntax of omp.xsl"
+                                     COMMAND xsltproc html/omp.xsl
+-                                    DEPENDS html/omp.xsl)
++                                    DEPENDS html/omp.xsl
++				    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+   add_custom_target (gsad-xsl-syntax ALL
+                                      COMMENT "Checking syntax of gsad.xsl"
+                                      COMMAND xsltproc html/gsad.xsl
+-                                     DEPENDS html/gsad.xsl)
++                                     DEPENDS html/gsad.xsl
++				     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+   add_custom_target (help-xsl-syntax ALL
+                                      COMMENT "Checking syntax of help.xsl"
+                                      COMMAND xsltproc html/help.xsl
+-                                     DEPENDS html/help.xsl)
++                                     DEPENDS html/help.xsl
++				     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+ else (PATH_TO_XSLTPROC)
+   message ("Not performing simple stylesheet tests -- xsltproc not found.")
+ endif (PATH_TO_XSLTPROC)
+--- CMakeLists.txt.orig	2011-04-02 14:49:48.000000000 +0200
++++ CMakeLists.txt	2011-04-02 14:50:28.000000000 +0200
+@@ -345,7 +345,7 @@
+                src/html/img/style/window_dec_c_error.png
+          DESTINATION ${GSA_DATA_DIR}/img/style)
+ 
+-install (FILES src/gsad_log.conf
++install (FILES ${CMAKE_CURRENT_BINARY_DIR}/src/gsad_log.conf
+          DESTINATION ${GSA_CONFIG_DIR})
+ 
+ ## Program
