@@ -2,19 +2,18 @@ Summary: 	Greenbone Security Assistant
 Name:		gsa
 Version:	2.0.1
 Release:	%mkrel 1
-Source:		http://wald.intevation.org/frs/download.php/561/greenbone-security-assistant-%version.tar.gz
+Source0:		http://wald.intevation.org/frs/download.php/561/greenbone-security-assistant-%version.tar.gz
 Patch0:		greenbone-security-assistant-2.0.1-build.patch
 Group:		System/Configuration/Networking
 Url:		http://www.openvas.org
 License:	GPLv2+
-BuildRoot:	%{_tmppath}/%name-%{version}-root
 BuildRequires:	cmake
 BuildRequires:	openvas-devel >= 4.0
 BuildRequires:	libmicrohttpd-devel >= 0.9.8
-BuildRequires:	libxslt-devel
-BuildRequires:	libxml2-devel
-BuildRequires:	glib2-devel
-BuildRequires:	gnutls-devel
+BuildRequires:	pkgconfig(libxslt)
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	xsltproc
 
 %description
@@ -30,15 +29,12 @@ vulnerability management.
 sed -i -e 's#-Werror##' `grep -rl Werror *|grep CMakeLists.txt`
 
 %build
+export LDFLAGS="-lopenvas_base -lopenvas_misc"
 %cmake -DSYSCONFDIR=%{_sysconfdir}
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std -C build
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
@@ -46,3 +42,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/gsad
 %{_mandir}/man8/gsad.8.*
 %{_datadir}/openvas/gsa
+
+
+%changelog
+* Sat Apr 02 2011 Funda Wang <fwang@mandriva.org> 2.0.1-1mdv2011.0
++ Revision: 649869
+- BR xslt
+- import gsa
+
