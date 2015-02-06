@@ -1,7 +1,7 @@
 Summary: 	Greenbone Security Assistant
 Name:		gsa
 Version:	2.0.1
-Release:	%mkrel 1
+Release:	2
 Source0:		http://wald.intevation.org/frs/download.php/561/greenbone-security-assistant-%version.tar.gz
 Patch0:		greenbone-security-assistant-2.0.1-build.patch
 Group:		System/Configuration/Networking
