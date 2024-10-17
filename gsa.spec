@@ -5,7 +5,7 @@ Release:	2
 Source0:		http://wald.intevation.org/frs/download.php/561/greenbone-security-assistant-%version.tar.gz
 Patch0:		greenbone-security-assistant-2.0.1-build.patch
 Group:		System/Configuration/Networking
-Url:		http://www.openvas.org
+Url:		https://www.openvas.org
 License:	GPLv2+
 BuildRequires:	cmake
 BuildRequires:	openvas-devel >= 4.0
